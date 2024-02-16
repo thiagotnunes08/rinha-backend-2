@@ -2,6 +2,7 @@ package br.com.rinha.backend2.transacao;
 import br.com.rinha.backend2.cliente.ClienteRepository;
 import br.com.rinha.backend2.cliente.ClienteResponse;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ public class NovaTransacaoController {
 
     @PostMapping("/clientes/{id}/transacoes")
     @Transactional
-    public ClienteResponse transfere(@PathVariable Long id, @RequestBody NovaTransaoRequest request) {
+    public ClienteResponse transfere(@PathVariable Long id, @RequestBody @Valid NovaTransaoRequest request) {
 
         var possivelCliente = clienteRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

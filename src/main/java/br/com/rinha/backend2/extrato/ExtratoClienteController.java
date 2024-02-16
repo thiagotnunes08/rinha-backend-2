@@ -16,13 +16,13 @@ public class ExtratoClienteController {
     }
 
     @GetMapping("/clientes/{id}/extrato")
-    public ExtratoClienteResponsse busca(@PathVariable("id") Long clienteId) {
+    public SaldoResponse busca(@PathVariable("id") Long clienteId) {
 
         var possivelCliente = clienteRepository
                 .findById(clienteId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        return new ExtratoClienteResponsse(possivelCliente);
+        return new SaldoResponse(possivelCliente);
 
     }
 }
