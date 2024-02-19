@@ -20,7 +20,7 @@ public class ExtratoClienteController {
     public SaldoResponse busca(@PathVariable("id") Long clienteId) {
 
         var transacoesCliente = transacaoRepository
-                .findAllByClienteId(clienteId);
+                .findAllByCliente(clienteId);
 
         if (transacoesCliente.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

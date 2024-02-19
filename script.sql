@@ -1,16 +1,16 @@
 create table cliente (
                          id bigserial not null,
-                         limite numeric(38,2),
-                         nome varchar(255),
+                         limite numeric(38),
+                         nome varchar(50),
                          saldo_inicial numeric(38),
                          primary key (id)
 );
 
 create table transacao (
                            id bigserial not null,
-                           descricao varchar(255),
+                           descricao varchar(10),
                            realizada_em timestamp(6),
-                           tipo varchar(255),
+                           tipo varchar(1),
                            valor numeric(38),
                            cliente_id bigint,
                            primary key (id)
@@ -24,7 +24,7 @@ alter table if exists transacao
 DO $$
 BEGIN
 INSERT INTO cliente (nome, limite, saldo_inicial) VALUES
-                                                      ('Gustavo Fring', 100000, 2),
+                                                      ('Gustavo Fring', 100000, 0),
                                                       ('Walter White',80000, 0),
                                                       ('Jesse Pinkman', 1000000, 0),
                                                       ('Saul Goodman', 10000000, 0),
