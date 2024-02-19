@@ -1,6 +1,6 @@
 package br.com.rinha.backend2.compartilhado;
 
-import jakarta.persistence.OptimisticLockException;
+import org.hibernate.StaleObjectStateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -12,7 +12,7 @@ public class ValidationExceptionHandler {
     public ResponseEntity<?> handleBeanValidationExceptions() {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
     }
-    @ExceptionHandler(OptimisticLockException.class)
+    @ExceptionHandler(StaleObjectStateException.class)
     public ResponseEntity<?> handleLockOtimistaExceptions() {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
     }
