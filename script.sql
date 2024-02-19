@@ -3,6 +3,7 @@ create table cliente (
                          limite numeric(38),
                          nome varchar(50),
                          saldo_inicial numeric(38),
+                         version bigint,
                          primary key (id)
 );
 
@@ -23,11 +24,11 @@ alter table if exists transacao
 
 DO $$
 BEGIN
-INSERT INTO cliente (nome, limite, saldo_inicial) VALUES
-                                                      ('Gustavo Fring', 100000, 0),
-                                                      ('Walter White',80000, 0),
-                                                      ('Jesse Pinkman', 1000000, 0),
-                                                      ('Saul Goodman', 10000000, 0),
-                                                      ('Hector Salamanca', 500000, 0);
+INSERT INTO cliente (nome, limite, saldo_inicial,version) VALUES
+                                                      ('Gustavo Fring', 100000, 0,0),
+                                                      ('Walter White',80000, 0,0),
+                                                      ('Jesse Pinkman', 1000000, 0,0),
+                                                      ('Saul Goodman', 10000000, 0,0),
+                                                      ('Hector Salamanca', 500000, 0,0);
 END;
 $$;

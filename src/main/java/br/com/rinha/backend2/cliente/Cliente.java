@@ -1,9 +1,6 @@
 package br.com.rinha.backend2.cliente;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -16,6 +13,8 @@ public class Cliente {
     private String nome;
     private BigDecimal limite;
     private BigDecimal saldoInicial;
+    @Version
+    private Long version;
 
     public boolean naoTemLimite(BigDecimal valor) {
         return this.limite.compareTo(valor) < 0;
