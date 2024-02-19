@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public record ExtratoClienteResponse(BigDecimal total, @JsonProperty(value = "data_extrato") LocalDateTime dataExtrato, BigDecimal limite) {
 
 
-    public ExtratoClienteResponse(Cliente possivelCliente) {
-        this(possivelCliente.getSaldo(),LocalDateTime.now(),possivelCliente.getLimite());
+    public ExtratoClienteResponse(Cliente cliente) {
+        this(cliente.getSaldo(),LocalDateTime.now(),cliente.getLimite());
     }
 }

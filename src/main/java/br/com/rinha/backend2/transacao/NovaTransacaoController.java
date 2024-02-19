@@ -22,6 +22,14 @@ public class NovaTransacaoController {
     @Transactional
     public ClienteResponse transfere(@PathVariable Long id, @RequestBody @Valid NovaTransaoRequest request) {
 
+        if (!request.tipoValido()){
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+
+        if (request.ehDecimal()){
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+
         var possivelCliente = clienteRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 

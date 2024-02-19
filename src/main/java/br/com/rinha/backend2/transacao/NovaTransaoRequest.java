@@ -12,4 +12,12 @@ public record NovaTransaoRequest(@Positive @NotNull BigDecimal valor, @NotBlank 
     public boolean ehDebito() {
         return this.tipo.equals("d");
     }
+
+    public boolean tipoValido() {
+        return this.tipo.equals("d") || this.tipo.equals("c");
+    }
+
+    public boolean ehDecimal() {
+        return this.valor.toString().contains(".");
+    }
 }
