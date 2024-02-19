@@ -1,13 +1,11 @@
 package br.com.rinha.backend2.cliente;
 
-import br.com.rinha.backend2.transacao.Transacao;
-import br.com.rinha.backend2.transacao.TransacaoResponse;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 public class Cliente {
@@ -18,9 +16,6 @@ public class Cliente {
     private String nome;
     private BigDecimal limite;
     private BigDecimal saldoInicial;
-
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Transacao> transacaos = new ArrayList<>();
 
     public boolean naoTemLimite(BigDecimal valor) {
         return this.limite.compareTo(valor) < 0;
@@ -36,13 +31,5 @@ public class Cliente {
 
     public BigDecimal getLimite() {
         return limite;
-    }
-
-    public void adicionaTransacao(Transacao transacao){
-        this.transacaos.add(transacao);
-    }
-
-    public List<TransacaoResponse> mapToResponse() {
-       return this.transacaos.stream().map(TransacaoResponse::new).collect(Collectors.toList());
     }
 }

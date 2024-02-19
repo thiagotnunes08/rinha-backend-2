@@ -2,13 +2,8 @@ create table cliente (
                          id bigserial not null,
                          limite numeric(38,2),
                          nome varchar(255),
-                         saldo_inicial numeric(38,2),
+                         saldo_inicial numeric(38),
                          primary key (id)
-);
-
-create table cliente_transacaos (
-                                    cliente_id bigint not null,
-                                    transacaos_id bigint not null
 );
 
 create table transacao (
@@ -16,23 +11,13 @@ create table transacao (
                            descricao varchar(255),
                            realizada_em timestamp(6),
                            tipo varchar(255),
-                           valor numeric(38,2),
+                           valor numeric(38),
+                           cliente_id bigint,
                            primary key (id)
 );
 
-alter table if exists cliente_transacaos
-    drop constraint if exists UK_cli_transaao;
-
-alter table if exists cliente_transacaos
-    add constraint UK_cli_transaao unique (transacaos_id);
-
-alter table if exists cliente_transacaos
-    add constraint transacaoFK
-        foreign key (transacaos_id)
-            references transacao;
-
-alter table if exists cliente_transacaos
-    add constraint clienteFK
+alter table if exists transacao
+    add constraint FKcliente
         foreign key (cliente_id)
             references cliente;
 

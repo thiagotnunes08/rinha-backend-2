@@ -1,5 +1,6 @@
 package br.com.rinha.backend2.transacao;
 
+import br.com.rinha.backend2.cliente.Cliente;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -13,12 +14,15 @@ public class Transacao {
     private String tipo;
     private String descricao;
     private LocalDateTime realizadaEm;
+    @ManyToOne
+    private Cliente cliente;
 
-    public Transacao(NovaTransaoRequest request) {
+    public Transacao(NovaTransaoRequest request, Cliente cliente) {
         this.valor = request.valor();
         this.tipo = request.tipo();
         this.descricao = request.descricao();
         this.realizadaEm = LocalDateTime.now();
+        this.cliente = cliente;
     }
 
     /**
@@ -43,5 +47,9 @@ public class Transacao {
 
     public LocalDateTime getRealizadaEm() {
         return realizadaEm;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
     }
 }

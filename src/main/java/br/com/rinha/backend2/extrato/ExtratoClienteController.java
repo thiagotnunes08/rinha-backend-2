@@ -1,28 +1,34 @@
 package br.com.rinha.backend2.extrato;
 
-import br.com.rinha.backend2.cliente.ClienteRepository;
+import br.com.rinha.backend2.transacao.TransacaoRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
 @RestController
 public class ExtratoClienteController {
 
-    private final ClienteRepository clienteRepository;
+    private final TransacaoRepository transacaoRepository;
 
-    public ExtratoClienteController(ClienteRepository clienteRepository) {
-        this.clienteRepository = clienteRepository;
+    public ExtratoClienteController(TransacaoRepository transacaoRepository) {
+        this.transacaoRepository = transacaoRepository;
     }
 
     @GetMapping("/clientes/{id}/extrato")
     public SaldoResponse busca(@PathVariable("id") Long clienteId) {
 
-        var possivelCliente = clienteRepository
-                .findById(clienteId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        var transacoesCliente = transacaoRepository
+                .findAllByClienteId(clienteId);
 
-        return new SaldoResponse(possivelCliente);
+        if (transacoesCliente.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        var cliente = transacoesCliente.getFirst().getCliente();
+
+        return new SaldoResponse(cliente, transacoesCliente);
 
     }
 }
