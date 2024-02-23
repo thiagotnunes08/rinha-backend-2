@@ -5,6 +5,6 @@ import java.math.BigDecimal;
 public record ClienteResponse(BigDecimal limite, BigDecimal saldo) {
 
     public ClienteResponse(Cliente cliente) {
-       this(cliente.getLimite(),cliente.getSaldo());
+       this(cliente.getLimite(),cliente.getSaldoInicial());
     }
 }

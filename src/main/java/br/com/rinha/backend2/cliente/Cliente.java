@@ -13,18 +13,25 @@ public class Cliente {
     private String nome;
     private BigDecimal limite;
     private BigDecimal saldoInicial;
-    @Version
-    private Long version;
-
-    public boolean naoTemLimite(BigDecimal valor) {
-        return this.limite.compareTo(valor) < 0;
+    public void creditaSaldo(BigDecimal valor) {
+        this.saldoInicial = saldoInicial.add(valor);
     }
 
-    public void atualizaSaldo(BigDecimal valor) {
-        this.saldoInicial = saldoInicial.subtract(valor);
+    public void debitaSaldo(BigDecimal valor) {
+        this.saldoInicial = this.saldoInicial.subtract(valor);
     }
 
-    public BigDecimal getSaldo() {
+    public boolean execedeuLimite() {
+
+        if (saldoInicial.compareTo(BigDecimal.ZERO) < 0) {
+
+            return saldoInicial.multiply(new BigDecimal("-1")).compareTo(limite) > 0;
+        }
+
+        return saldoInicial.compareTo(limite) > 0;
+    }
+
+    public BigDecimal getSaldoInicial() {
         return saldoInicial;
     }
 

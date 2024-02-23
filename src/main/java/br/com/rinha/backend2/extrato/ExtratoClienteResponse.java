@@ -10,6 +10,6 @@ public record ExtratoClienteResponse(BigDecimal total, @JsonProperty(value = "da
 
 
     public ExtratoClienteResponse(Cliente cliente) {
-        this(cliente.getSaldo(),LocalDateTime.now(),cliente.getLimite());
+        this(cliente.getSaldoInicial(),LocalDateTime.now(),cliente.getLimite());
     }
 }

@@ -20,4 +20,8 @@ public record NovaTransaoRequest(@Positive @NotNull BigDecimal valor, @NotBlank 
     public boolean ehDecimal() {
         return this.valor.toString().contains(".");
     }
+
+    public boolean ehCredito() {
+        return this.tipo.equals("c");
+    }
 }

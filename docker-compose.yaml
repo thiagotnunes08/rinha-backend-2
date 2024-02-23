@@ -18,11 +18,15 @@ services:
       - "5432:5432"
     networks:
       - rinha-network
-
+#    deploy:
+#      resources:
+#        limits:
+#          memory: "300MB"
+#          cpus: "0.5"
 
 
   api1:
-    image: thiagotnunes08/rinha-api-2:1.6
+    image: thiagotnunes08/rinha-api-2:2.8
     hostname: api1
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://rinha-postgres:5432/rinha
@@ -32,9 +36,14 @@ services:
       - rinha-network
     depends_on:
       - rinha-postgres
+#    deploy:
+#      resources:
+#        limits:
+#          memory: "125MB"
+#          cpus: "0.25"
 
   api2:
-    image: thiagotnunes08/rinha-api-2:1.6
+    image: thiagotnunes08/rinha-api-2:2.8
     hostname: api2
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://rinha-postgres:5432/rinha
@@ -44,6 +53,11 @@ services:
       - rinha-network
     depends_on:
       - rinha-postgres
+#    deploy:
+#      resources:
+#        limits:
+#          memory: "125MB"
+#          cpus: "0.25"
 
   nginx:
     image: nginx:1.17.6-alpine
@@ -56,3 +70,8 @@ services:
     depends_on:
       - api1
       - api2
+#    deploy:
+#      resources:
+#        limits:
+#          memory: "50MB"
+#          cpus: "0.25"
