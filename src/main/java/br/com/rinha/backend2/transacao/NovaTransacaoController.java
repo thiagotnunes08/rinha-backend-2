@@ -16,11 +16,9 @@ import org.springframework.web.server.ResponseStatusException;
 public class NovaTransacaoController {
 
     private final ClienteRepository clienteRepository;
-    private final TransacaoRepository transacaoRepository;
 
-    public NovaTransacaoController(ClienteRepository clienteRepository, TransacaoRepository transacaoRepository) {
+    public NovaTransacaoController(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
-        this.transacaoRepository = transacaoRepository;
     }
 
     @PostMapping("/clientes/{id}/transacoes")
@@ -55,11 +53,10 @@ public class NovaTransacaoController {
 
             cliente.creditaSaldo(request.valor());
         }
-        transacaoRepository.save(new Transacao(request, cliente));
 
-        ResponseEntity<ClienteResponse> ok = ResponseEntity.ok(new ClienteResponse(cliente));
+        cliente.adicionaTransacao(request);
 
-        return ok;
+        return ResponseEntity.ok(new ClienteResponse(cliente));
     }
 }
 

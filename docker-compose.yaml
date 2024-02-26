@@ -26,7 +26,7 @@ services:
 
 
   api1:
-    image: thiagotnunes08/rinha-api-2:2.8
+    image: thiagotnunes08/rinha-api-2:3.2
     hostname: api1
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://rinha-postgres:5432/rinha
@@ -43,7 +43,7 @@ services:
 #          cpus: "0.25"
 
   api2:
-    image: thiagotnunes08/rinha-api-2:2.8
+    image: thiagotnunes08/rinha-api-2:3.2
     hostname: api2
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://rinha-postgres:5432/rinha

@@ -12,8 +12,8 @@ public class ValidationExceptionHandler {
     public ResponseEntity<?> handleBeanValidationExceptions() {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
     }
-    @ExceptionHandler(StaleObjectStateException.class)
-    public ResponseEntity<?> handleLockOtimistaExceptions() {
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-    }
+//    @ExceptionHandler(StaleObjectStateException.class)
+//    public ResponseEntity<?> handleLockOtimistaExceptions() {
+//        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+//    }
 }
